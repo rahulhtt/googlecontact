@@ -9,14 +9,13 @@ const RegisterPage = () => {
     const { formik } = useRegisterForm()
     return (
         <div className='flex justify-center items-center min-h-screen sm:p-10' >
-            <div className='container w-[450px] h-[600px] border border-1 border-gray-200 shadow-sm rounded-sm p-10'>
+            <div className='container w-[450px] h-[550px] border border-1 border-gray-200 shadow-sm rounded-sm p-10'>
                 <ToastContainer />
                 <div className='login-box'>
                     <div className='logo'>
                         <img className="w-40 h-20 mx-auto text-center " src={logo} alt=" logo" />
                     </div>
-                    <div className='text-center text-3xl'>Create a Google Account</div>
-                    <div className='s-text text-center text-lg mt-2'>Fill Details</div>
+                    <div className='text-center text-2xl mb-10'>Create a Google Account</div>
                     <form onSubmit={formik.handleSubmit} action="#">
                         <TextField id="name" style={{ width: 380 }}
                             onChange={formik.handleChange}

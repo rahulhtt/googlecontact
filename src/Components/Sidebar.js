@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Drawer, styled } from "@mui/material";
 import SidebarContent from './SidebarContent';
 

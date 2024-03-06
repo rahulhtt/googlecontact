@@ -26,7 +26,7 @@ function Login() {
                             margin='normal'
                             value={formik.values.email}
                             type="email" label="Email" variant="outlined" />
-                        {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
+                        {formik.touched.email && formik.errors.email ? <div className='text-red-700'>{formik.errors.email}</div> : null}
                         <TextField id="password"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -36,7 +36,7 @@ function Login() {
                             type="password"
                             label="Password"
                             variant="outlined" />
-                        {formik.touched.password && formik.errors.password ? <div className='error'>{formik.errors.password}</div> : null}
+                        {formik.touched.password && formik.errors.password ? <div className='text-red-700'>{formik.errors.password}</div> : null}
                         <div className="flex justify-between mt-4">
                             <Link to="/register" className="left mt-3 text-sm font-medium text-blue-600 hover:underline">Create Account </Link>
                             <button type="submit" className="right text-white bg-[#0466c8] p-2 text-lg rounded-md py-2 px-4 hover:shadow-lg 

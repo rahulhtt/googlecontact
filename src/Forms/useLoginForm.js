@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { setToken } from "../Feature/authSlice";
-// Assuming you have defined this slice
+import { setUser } from "../Feature/userSlice";
 
+// Assuming you have defined this slice
 const useLoginForm = () => {
 
     const dispatch = useDispatch();
@@ -20,11 +21,13 @@ const useLoginForm = () => {
         password: "",
     };
 
+    //validate initial values
     const validationSchema = Yup.object({
-        email: Yup.string().email("Invalid email format").required('Email is required'),
+        email: Yup.string().email("Invalid email Address").required('Email is required'),
         password: Yup.string().required("Password is required"),
     });
 
+    //check user credentials
     const onSubmit = async (values) => {
         try {
             const response = await axios.post(`http://${IP_ADD}:3000/login`, {
@@ -34,8 +37,11 @@ const useLoginForm = () => {
             toast.success('Login successful', { position: "bottom-center", autoClose: 2000 });
             const data = response.data;
             const authToken = data.accessToken;
-            dispatch(setToken(authToken));
+            const userToken = data.user.id
+            dispatch(setToken(authToken));//user token
+            dispatch(setUser(userToken));//user id 
             localStorage.setItem('token', authToken);
+            localStorage.setItem('user', userToken);
             setTimeout(() => {
                 navigate('/contact');
             }, 2000);
@@ -50,7 +56,7 @@ const useLoginForm = () => {
         validationSchema,
         onSubmit,
     });
-
+    //return formik data
     return { formik };
 };
 

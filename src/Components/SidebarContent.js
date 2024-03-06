@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Menu, MenuItem, Box, styled } from '@mui/material';
 import { Add, Person2Outlined } from '@mui/icons-material'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { toast, ToastContainer } from 'react-toastify';
-
+import PersonIcon from '@mui/icons-material/Person';
 const CreateButton = styled(Button)({
     color: 'black',
     borderRadius: 16,
@@ -27,6 +27,7 @@ const SidebarContent = () => {
     const handleLogout = (e) => {
         e.preventDefault();
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         toast.success('Logged out successfully', { position: "top-right" });
         setTimeout(() => {
             navigate('/login');
@@ -41,10 +42,10 @@ const SidebarContent = () => {
                 aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                style={{ marginLeft: 20, background: "#a3cef1" }}
+                style={{ marginLeft: 20, background: "#a2d2ff" }}
                 onClick={handleClick}
             >
-                <Add color='action' style={{ paddingRight: 5, }} />
+                <Add color='#000' style={{ paddingRight: 5, }} />
                 Create contact
             </CreateButton>
             <Menu
@@ -58,11 +59,13 @@ const SidebarContent = () => {
                 <MenuItem onClick={handleClose}><Person2Outlined style={{ marginRight: 10 }} />
                     <Link to="/create">Create Contact</Link></MenuItem>
             </Menu>
-            <button className="ml-4 w-[200px] hover:bg-[#e5e5e5] border border-black  rounded-[90px] mt-6 h-[40px]">
-                <Link to="/contact" className='p-1 '>Contacts</Link>
-            </button>
-            <button onClick={handleLogout} className='ml-4 p-1 border mt-2 border-black hover:bg-[#e5e5e5] w-[200px] h-[40px] rounded-[90px]'>
-                Logout <LogoutIcon className='p-1 ' />
+            <div className='mt-6 flex justify-center  px-4'>
+                <NavLink to="/contact" className={({ isActive }) =>
+                    ` ${isActive ? "text-gray-700 bg-[#a2d2ff]" : "text-gray-700"} w-[200px] hover:bg-[#e5e5e5] px-4 py-2 rounded-[90px] duration-200`
+                }><PersonIcon className='mr-2' />Contacts</NavLink>
+            </div>
+            <button onClick={handleLogout} className='ml-6 p-1 flex justify-center items-center bg-[#e5e5e5] mt-2  hover:bg-[#a2d2ff] w-[200px] h-[40px] rounded-[90px]'>
+                Logout <LogoutIcon className='p-1' />
             </button>
         </Box>
     )

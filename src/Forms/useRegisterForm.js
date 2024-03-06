@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -22,7 +22,7 @@ const useRegisterForm = () => {
 
     const onSubmit = async (values) => {
         try {
-            const response = await axios.post(`http://${process.env.REACT_APP_IP_ADD}:3000/register`, {
+            await axios.post(`http://${process.env.REACT_APP_IP_ADD}:3000/register`, {
                 name: values.name,
                 email: values.email,
                 password: values.password,
